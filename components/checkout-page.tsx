@@ -12,6 +12,7 @@ import { formatPrice, maskCardNumber, slugify } from "@/lib/utils";
 
 type CheckoutPageProps = {
   initialUser: AppUser;
+  initialIsAdmin: boolean;
 };
 
 const SUPABASE_CONFIGURED = Boolean(
@@ -61,8 +62,9 @@ async function uploadDraftImage(userId: string, draft: ScentDraft) {
   return path;
 }
 
-export function CheckoutPage({ initialUser }: CheckoutPageProps) {
+export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps) {
   const [currentUser, setCurrentUser] = useState<AppUser>(initialUser);
+  const isAdmin = Boolean(currentUser?.email && initialIsAdmin && currentUser.email === initialUser?.email);
   const [draft, setDraft] = useState<ScentDraft | null>(null);
   const [formValues, setFormValues] = useState<ShippingFormValues>(defaultForm);
   const [message, setMessage] = useState<string | null>(null);
@@ -196,9 +198,19 @@ export function CheckoutPage({ initialUser }: CheckoutPageProps) {
           </Link>
           <div className="flex items-center gap-3">
             <div className="text-sm uppercase tracking-[0.3em] text-muted">Secure Checkout</div>
+            {isAdmin ? (
+              <Link
+                href="/admin"
+                className="rounded-full bg-surface-high px-4 py-2 text-sm font-medium text-muted transition hover:bg-surface-highest hover:text-foreground"
+              >
+                后台
+              </Link>
+            ) : null}
             {currentUser ? (
               <SignOutButton
-                onSignedOut={() => setCurrentUser(null)}
+                onSignedOut={() => {
+                  setCurrentUser(null);
+                }}
                 className="rounded-full bg-surface-high px-4 py-2 text-sm font-medium text-muted transition hover:bg-surface-highest hover:text-foreground disabled:cursor-not-allowed disabled:opacity-60"
               />
             ) : null}

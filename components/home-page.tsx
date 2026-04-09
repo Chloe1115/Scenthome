@@ -23,6 +23,7 @@ import { cn, formatPrice, readAsDataUrl, slugify } from "@/lib/utils";
 
 type HomePageProps = {
   initialUser: AppUser;
+  initialIsAdmin: boolean;
 };
 
 type MessageState = {
@@ -89,7 +90,7 @@ async function uploadDraftImage(userId: string, image: UploadedImage | null, cur
   return path;
 }
 
-export function HomePage({ initialUser }: HomePageProps) {
+export function HomePage({ initialUser, initialIsAdmin }: HomePageProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
@@ -118,6 +119,7 @@ export function HomePage({ initialUser }: HomePageProps) {
   const [isNavigatingToCheckout, setIsNavigatingToCheckout] = useState(false);
 
   const canGenerate = narrative.trim().length > 0 || Boolean(uploadedImage);
+  const isAdmin = Boolean(currentUser?.email && initialIsAdmin && currentUser.email === initialUser?.email);
   const currentDraft = useMemo(
     () =>
       buildDraft({
@@ -509,8 +511,18 @@ export function HomePage({ initialUser }: HomePageProps) {
                 <span className="hidden rounded-full bg-surface-high px-4 py-2 text-sm text-muted md:inline-flex">
                   {currentUser.email ?? "已登录用户"}
                 </span>
+                {isAdmin ? (
+                  <Link
+                    href="/admin"
+                    className="rounded-full bg-surface-high px-4 py-2 text-sm font-medium text-muted transition hover:bg-surface-highest hover:text-foreground"
+                  >
+                    后台
+                  </Link>
+                ) : null}
                 <SignOutButton
-                  onSignedOut={() => setCurrentUser(null)}
+                  onSignedOut={() => {
+                    setCurrentUser(null);
+                  }}
                   className="rounded-full bg-surface-high px-4 py-2 text-sm font-medium text-muted transition hover:bg-surface-highest hover:text-foreground disabled:cursor-not-allowed disabled:opacity-60"
                 />
               </>
@@ -1021,6 +1033,11 @@ export function HomePage({ initialUser }: HomePageProps) {
             <Link href="/checkout" className="transition hover:text-foreground">
               付款页
             </Link>
+            {isAdmin ? (
+              <Link href="/admin" className="transition hover:text-foreground">
+                后台
+              </Link>
+            ) : null}
           </div>
         </div>
       </footer>

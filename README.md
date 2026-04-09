@@ -39,6 +39,8 @@ cp .env.example .env.local
 ```env
 NEXT_PUBLIC_SUPABASE_URL=你的 Supabase Project URL
 NEXT_PUBLIC_SUPABASE_ANON_KEY=你的 Supabase anon key
+SUPABASE_SERVICE_ROLE_KEY=你的 Supabase service role key
+ADMIN_EMAILS=你的管理员邮箱，多个用逗号分隔
 MINIMAX_API_KEY=你的 MiniMax API key
 MINIMAX_BASE_URL=https://api.minimaxi.com/v1
 MINIMAX_MODEL=MiniMax-M2.5
@@ -65,6 +67,8 @@ npm run dev
 3. 在 Vercel 项目环境变量中填写：
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `ADMIN_EMAILS`
    - `MINIMAX_API_KEY`
    - `MINIMAX_BASE_URL`
    - `MINIMAX_MODEL`
@@ -80,6 +84,7 @@ npm run dev
 - 当前支付页是 MVP 版本，不会真的扣款，只会把订单记录到 Supabase
 - 现在支持访客下单：不登录也可以购买，但需要填写邮箱作为订单联系凭证
 - 现在支持“先试用、后决定”：只要不点保存，生成结果就尽量保留在前端 session，不会额外占用数据库
+- 现在支持管理员后台：配置 `SUPABASE_SERVICE_ROLE_KEY` 和 `ADMIN_EMAILS` 后，可在 `/admin` 查看注册用户和订单信息
 - 如果后面你要接真实支付，我建议下一步升级 Stripe
 - 现在“生成专属方案”已经是实际 AI 生成，不再是本地规则假数据
 - 图片识别优先走 GLM-4.6V-Flash，识别结果再交给 MiniMax 组织成最终香气方案

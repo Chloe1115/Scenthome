@@ -12,3 +12,17 @@ export function getSupabaseEnv() {
 export function isSupabaseConfigured() {
   return Boolean(getSupabaseEnv());
 }
+
+export function getSupabaseAdminEnv() {
+  const publicEnv = getSupabaseEnv();
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!publicEnv || !serviceRoleKey) {
+    return null;
+  }
+
+  return {
+    url: publicEnv.url,
+    serviceRoleKey,
+  };
+}
