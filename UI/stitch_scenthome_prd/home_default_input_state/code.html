@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ScentHome | Reconnect with the Scents of Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#fbf9f5",
+              "tertiary-container": "#4c7c7f",
+              "tertiary-fixed": "#b9ecee",
+              "on-error": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "surface-bright": "#fbf9f5",
+              "primary-fixed": "#fdddb9",
+              "tertiary-fixed-dim": "#9ecfd1",
+              "on-tertiary-fixed": "#002021",
+              "surface-container-highest": "#e4e2de",
+              "surface-container-low": "#f5f3ef",
+              "error": "#ba1a1a",
+              "secondary-container": "#d3e4d2",
+              "outline": "#7f756b",
+              "on-primary-fixed-variant": "#584329",
+              "on-tertiary-fixed-variant": "#1a4e50",
+              "secondary-fixed": "#d6e7d5",
+              "surface-container": "#efeeea",
+              "surface-dim": "#dbdad6",
+              "primary": "#6f583c",
+              "on-primary-container": "#fffbff",
+              "on-secondary-fixed": "#111f13",
+              "inverse-on-surface": "#f2f0ed",
+              "on-surface-variant": "#4e453c",
+              "outline-variant": "#d1c4b9",
+              "inverse-primary": "#e0c29f",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#f2ffff",
+              "on-primary": "#ffffff",
+              "tertiary": "#336366",
+              "secondary": "#536254",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed": "#281803",
+              "secondary-fixed-dim": "#bacbb9",
+              "surface": "#fbf9f5",
+              "surface-container-high": "#eae8e4",
+              "error-container": "#ffdad6",
+              "on-background": "#1b1c1a",
+              "surface-variant": "#e4e2de"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+      }
+      .glass-morphism {
+        background: rgba(251, 249, 245, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .ai-swirl {
+        background: radial-gradient(circle at 50% 50%, #b9ecee 0%, transparent 60%),
+                    radial-gradient(circle at 80% 20%, #d3e4d2 0%, transparent 40%);
+        filter: blur(80px);
+        opacity: 0.4;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-7xl mx-auto">
+<a class="text-2xl font-headline italic text-stone-900 dark:text-stone-50" href="#">ScentHome</a>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-sm font-medium transition-colors duration-300 text-stone-900 dark:text-stone-50 border-b-2 border-stone-800 dark:border-stone-200 pb-1" href="#">Home</a>
+<a class="text-sm font-medium transition-colors duration-300 text-stone-500 dark:text-stone-400 hover:text-stone-900" href="#">The Archive</a>
+<a class="text-sm font-medium transition-colors duration-300 text-stone-500 dark:text-stone-400 hover:text-stone-900" href="#">Curator</a>
+<a class="text-sm font-medium transition-colors duration-300 text-stone-500 dark:text-stone-400 hover:text-stone-900" href="#">About Us</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-sm font-medium text-stone-700 dark:text-stone-300 hover:text-stone-900 transition-colors">Login</button>
+<button class="hidden lg:block bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-lg text-sm font-medium shadow-sm active:scale-[0.98] transition-all">Start Experience</button>
+</div>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative px-8 pt-20 pb-32 max-w-7xl mx-auto overflow-hidden">
+<div class="absolute top-0 right-0 w-1/2 h-full ai-swirl -z-10"></div>
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<h1 class="display-lg font-headline text-6xl lg:text-8xl tracking-tight leading-[1.1]">
+                        Reconnect with the <span class="italic text-primary">Scents</span> of Home.
+                    </h1>
+<p class="text-xl text-on-surface-variant max-w-lg leading-relaxed">
+                        AI-powered memory-to-scent recreation platform. We translate your most cherished moments into unique olfactory profiles.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-xl font-medium text-lg active:scale-[0.98] transition-all flex items-center gap-2" href="#synthesis-engine">
+                            Start Your Scent Journey
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+<button class="bg-surface-container-highest text-on-surface px-8 py-4 rounded-xl font-medium text-lg transition-colors flex items-center gap-2">
+                            Watch the Process
+                        </button>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden bg-surface-container-low">
+<img alt="Artistic scent bottle with botanical elements" class="w-full h-full object-cover mix-blend-multiply opacity-90" data-alt="Minimalist luxury glass perfume bottle on a textured stone pedestal, soft morning sunlight, dried botanical herbs blurred in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPMizHuIBD95H7xN91B8fTr8CeLUawJTS_pctffd3H10oP2p-7m3EVfbKb5hRmoGuGQHNb0YNQJdEPH2MDytllzWfp7xlwn14rhjoVPQEuUtz_SlBEkz_EHW5w2AZMgKExUb4USe-5sjEOu_oCdloawSBKr04j5bWNBVyQlQWDpMjGQy0HCQ-eWVSQniH8BO-4Co4A6K-5lCd_Hud4hBG0qbaRFqfBgK0oG16uI5u6wwsR67luV9zyucdJY1WyvSu5PKo-ge0xhKo"/>
+</div>
+<div class="absolute -bottom-10 -left-10 glass-morphism p-8 rounded-2xl border border-white/20 shadow-2xl max-w-xs hidden md:block">
+<p class="font-headline text-2xl mb-2 italic">"The scent of rain on dry cedar wood."</p>
+<p class="text-sm text-on-surface-variant">— Memory #842, Recreated 2024</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Synthesis Engine Section (Input State) -->
+<section class="py-24 bg-surface-container-low" id="synthesis-engine">
+<div class="max-w-5xl mx-auto px-8">
+<div class="text-center mb-16 space-y-4">
+<span class="text-tertiary font-medium tracking-widest text-xs uppercase">Step 1: The Input</span>
+<h2 class="text-4xl lg:text-5xl font-headline">Begin Your AI Synthesis</h2>
+<p class="text-on-surface-variant">Your memory is the foundation of the olfactory profile.</p>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl p-8 lg:p-12 shadow-sm border border-outline-variant/10">
+<div class="grid lg:grid-cols-2 gap-12">
+<!-- Left Column: Memory & Photo -->
+<div class="space-y-8">
+<div class="space-y-3">
+<label class="text-sm font-semibold uppercase tracking-wider text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">edit_note</span>
+                                    Narrative Memory
+                                </label>
+<textarea class="w-full bg-surface-container-low border-none rounded-xl p-6 focus:ring-0 focus:border-b-2 focus:border-tertiary transition-all placeholder:text-outline/50 resize-none font-body text-lg" placeholder="Tell us about a childhood memory, a place, or a person..." rows="6"></textarea>
+</div>
+<div class="space-y-3">
+<label class="text-sm font-semibold uppercase tracking-wider text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">photo_library</span>
+                                    Visual Anchor
+                                </label>
+<div class="relative group cursor-pointer border-2 border-dashed border-outline-variant/30 rounded-xl p-10 flex flex-col items-center justify-center gap-4 hover:border-tertiary/50 transition-all">
+<span class="material-symbols-outlined text-4xl text-outline">upload_file</span>
+<div class="text-center">
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg text-sm font-medium mb-2">Upload Photo</button>
+<p class="text-xs text-outline italic">or Drag and Drop memory images</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Emotions & Trigger -->
+<div class="space-y-12">
+<div class="space-y-6">
+<label class="text-sm font-semibold uppercase tracking-wider text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">psychology</span>
+                                    Emotional Resonance
+                                </label>
+<div class="flex flex-wrap gap-3">
+<button class="px-5 py-2.5 rounded-full border border-outline-variant text-sm font-medium hover:bg-primary hover:text-white hover:border-primary transition-all">Joy</button>
+<button class="px-5 py-2.5 rounded-full bg-primary text-white border border-primary text-sm font-medium">Nostalgia</button>
+<button class="px-5 py-2.5 rounded-full border border-outline-variant text-sm font-medium hover:bg-primary hover:text-white hover:border-primary transition-all">Peace</button>
+<button class="px-5 py-2.5 rounded-full border border-outline-variant text-sm font-medium hover:bg-primary hover:text-white hover:border-primary transition-all">Comfort</button>
+<button class="px-5 py-2.5 rounded-full border border-outline-variant text-sm font-medium hover:bg-primary hover:text-white hover:border-primary transition-all">Wonder</button>
+</div>
+</div>
+<div class="bg-tertiary-container/5 rounded-2xl p-8 border border-tertiary/10 space-y-6">
+<h4 class="font-headline text-xl italic">Ready to synthesize?</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Our AI will analyze 1,400+ botanical compounds to match the emotional and visual cues of your memory.</p>
+<button class="w-full bg-tertiary text-on-tertiary py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 active:scale-[0.99] transition-all shadow-lg shadow-tertiary/20">
+<span class="material-symbols-outlined" data-weight="fill">auto_fix_high</span>
+                                    Begin AI Synthesis
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works (Bento Grid) -->
+<section class="py-32 px-8 max-w-7xl mx-auto">
+<div class="grid lg:grid-cols-12 gap-6">
+<div class="lg:col-span-8 bg-surface-container rounded-2xl p-12 flex flex-col justify-between min-h-[400px]">
+<h3 class="text-5xl font-headline max-w-md leading-tight">Translating the <span class="italic">Immaterial</span> into the Physical.</h3>
+<div class="grid md:grid-cols-3 gap-8 mt-12">
+<div class="space-y-3">
+<div class="text-tertiary text-2xl font-headline">01. Extract</div>
+<p class="text-sm text-on-surface-variant">We parse your narrative for olfactory triggers—rain, old paper, salt air, or baked bread.</p>
+</div>
+<div class="space-y-3">
+<div class="text-tertiary text-2xl font-headline">02. Synthesize</div>
+<p class="text-sm text-on-surface-variant">AI models the chemical composition using a database of 12,000 distinct aromatic notes.</p>
+</div>
+<div class="space-y-3">
+<div class="text-tertiary text-2xl font-headline">03. Archive</div>
+<p class="text-sm text-on-surface-variant">Your scent is physically compounded, bottled, and stored in our digital &amp; physical archive.</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 bg-primary text-on-primary rounded-2xl p-12 relative overflow-hidden flex flex-col justify-end min-h-[400px]">
+<div class="absolute top-0 right-0 p-8">
+<span class="material-symbols-outlined text-6xl opacity-20">hourglass_empty</span>
+</div>
+<div class="relative z-10 space-y-4">
+<h4 class="text-2xl font-headline italic">Timeless Craftsmanship</h4>
+<p class="text-on-primary/80 text-sm leading-relaxed">Every bottle is hand-finished with a custom label generated from your unique memory metadata.</p>
+</div>
+</div>
+<div class="lg:col-span-4 bg-surface-container-high rounded-2xl p-8 aspect-square flex flex-col items-center justify-center text-center gap-6">
+<div class="w-24 h-24 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-on-tertiary-fixed">memory</span>
+</div>
+<h5 class="text-xl font-headline">Neural Mapping</h5>
+<p class="text-xs text-on-surface-variant max-w-[200px]">We map the neural pathways of nostalgia to the exact molecular weight of scents.</p>
+</div>
+<div class="lg:col-span-8 overflow-hidden rounded-2xl relative">
+<img alt="Laboratory distilling essence" class="w-full h-full object-cover" data-alt="Artistic close-up of amber glass laboratory equipment, steam rising, warm laboratory lighting, professional and clean apothecary vibe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKdfNw7GqUXPKNmhSCpreUokUEV5Gn8rx-5ikShQaTsxhxoFv6wT96naM0nw3E72KdSQ768qRmabq7sz4aT5wlf537cQk2gwRXxoXM1SzrXoaz7mgZt2t94vdE8fPaBvcQhwvE-bowZKXnL3an9cP0-kistAlg7NffDnbJmAKyym-BrDKK3VMgvjkmHGN8HQRXz1NRoDkoy2ACRWUKDVhIS9MZnUZQBD8g-KBUuTAlXQUJDTgZ1E8WK3W8LPyfNuH7KwhHZRit-8k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-12">
+<p class="text-white text-lg font-headline italic">Precision meets poetry in our distillation process.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 mt-20 bg-stone-100 dark:bg-stone-900 border-t border-stone-200/10 dark:border-stone-800/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
+<div class="space-y-2">
+<span class="text-xl font-serif text-stone-800 dark:text-stone-200 block">ScentHome</span>
+<p class="text-sm font-body text-stone-500 dark:text-stone-400">© 2024 The Olfactory Archive. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-sm font-body text-stone-500 dark:text-stone-400 hover:underline decoration-stone-400 transition-all" href="#">Terms of Service</a>
+<a class="text-sm font-body text-stone-500 dark:text-stone-400 hover:underline decoration-stone-400 transition-all" href="#">Privacy Policy</a>
+<a class="text-sm font-body text-stone-500 dark:text-stone-400 hover:underline decoration-stone-400 transition-all" href="#">Contact Curator</a>
+<a class="text-sm font-body text-stone-500 dark:text-stone-400 hover:underline decoration-stone-400 transition-all" href="#">The Process</a>
+</div>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center text-stone-600 hover:bg-stone-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-lg">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center text-stone-600 hover:bg-stone-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+</div>
+</div>
+</footer>
+</body></html>

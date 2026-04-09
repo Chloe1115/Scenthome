@@ -1,0 +1,40 @@
+{
+  "name": "scenthome",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ScentHome web application built for Vercel + Supabase.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "keywords": [
+    "nextjs",
+    "supabase",
+    "vercel",
+    "scenthome"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/ssr": "^0.10.0",
+    "@supabase/supabase-js": "^2.101.1",
+    "next": "^16.2.1",
+    "openai": "^6.33.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.27",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.1",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.18",
+    "typescript": "^6.0.2"
+  }
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - ScentHome</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#fbf9f5",
+              "tertiary-container": "#4c7c7f",
+              "tertiary-fixed": "#b9ecee",
+              "on-error": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "surface-bright": "#fbf9f5",
+              "primary-fixed": "#fdddb9",
+              "tertiary-fixed-dim": "#9ecfd1",
+              "on-tertiary-fixed": "#002021",
+              "surface-container-highest": "#e4e2de",
+              "surface-container-low": "#f5f3ef",
+              "error": "#ba1a1a",
+              "secondary-container": "#d3e4d2",
+              "outline": "#7f756b",
+              "on-primary-fixed-variant": "#584329",
+              "on-tertiary-fixed-variant": "#1a4e50",
+              "secondary-fixed": "#d6e7d5",
+              "surface-container": "#efeeea",
+              "surface-dim": "#dbdad6",
+              "primary-container": "#897052",
+              "on-secondary-container": "#576758",
+              "on-secondary-fixed-variant": "#3b4a3d",
+              "surface-tint": "#715a3e",
+              "primary-fixed-dim": "#e0c29f",
+              "on-secondary": "#ffffff",
+              "on-error-container": "#93000a",
+              "inverse-surface": "#30312e",
+              "primary": "#6f583c",
+              "on-primary-container": "#fffbff",
+              "on-secondary-fixed": "#111f13",
+              "inverse-on-surface": "#f2f0ed",
+              "on-surface-variant": "#4e453c",
+              "outline-variant": "#d1c4b9",
+              "inverse-primary": "#e0c29f",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#f2ffff",
+              "on-primary": "#ffffff",
+              "tertiary": "#336366",
+              "secondary": "#536254",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed": "#281803",
+              "secondary-fixed-dim": "#bacbb9",
+              "surface": "#fbf9f5",
+              "surface-container-high": "#eae8e4",
+              "error-container": "#ffdad6",
+              "on-background": "#1b1c1a",
+              "surface-variant": "#e4e2de"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-panel {
+        background-color: rgba(251, 249, 245, 0.65);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        font-size: 20px;
+      }
+      input:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface selection:bg-primary-fixed-dim selection:text-on-primary-fixed min-h-screen flex flex-col relative overflow-hidden">
+<!-- Hero Background Image (Suppressed Shell for focused task) -->
+<div class="fixed inset-0 z-0">
+<img alt="The Archive Background" class="w-full h-full object-cover brightness-95 opacity-60 scale-105" data-alt="Dreamy out-of-focus meadow at sunrise with soft golden light and gentle morning mist, evoking a sense of nostalgic warmth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_-CLFN0_dDUuir3158RAtTq_TSIkyQJzGvglhbWRFlmsTItzHXbN9Fu_TZ7bacnokN4l6ak8O7Hc1K_3UExUhECb_-tYQT7fMw1tdQxkP6KipOVYk1otaE0Y9lL8zc-RfFJu7BzpwvkMhECrtPYkaG9SVyWGKD_c-tRBZ7x2IwKZfdqkfGPiYLB5xD_VNdwuJkKp1YsuRCUXW4m5w_WhOppMco4oIti8FARc__A9UvOvPJ8rhJr0-EsOCh1-40cy7SIg3ybZs28E"/>
+<!-- Subtle digital glow overlay -->
+<div class="absolute inset-0 bg-gradient-to-tr from-background via-transparent to-tertiary-fixed/10"></div>
+</div>
+<!-- Top Brand Mark (Minimalist Anchor) -->
+<nav class="relative z-10 w-full flex justify-center py-10">
+<div class="text-3xl font-headline italic font-medium tracking-tight text-on-surface">
+            ScentHome
+        </div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex-grow flex items-center justify-center px-6 pb-20">
+<div class="w-full max-w-[440px] glass-panel p-8 md:p-12 rounded-xl shadow-2xl shadow-primary/5 transition-all">
+<!-- Header Section -->
+<div class="text-center space-y-4 mb-10">
+<h1 class="text-4xl md:text-5xl font-headline text-on-surface leading-tight">Enter the Archive</h1>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed max-w-[320px] mx-auto">
+                    Login to save your scent profiles and revisit your memories any time.
+                </p>
+</div>
+<!-- Interaction Form -->
+<form action="#" class="space-y-6" onsubmit="return false;">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant pl-1" for="email">Email</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">mail</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-colors focus:bg-surface-container-high focus:ring-0 focus:border-b-2 focus:border-tertiary" id="email" name="email" placeholder="curator@scenthome.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant" for="password">Password</label>
+<a class="text-[10px] uppercase font-bold tracking-wider text-primary hover:text-primary-container transition-colors" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">lock</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-colors focus:bg-surface-container-high focus:ring-0 focus:border-b-2 focus:border-tertiary" id="password" name="password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="pt-4 space-y-4">
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-semibold rounded-lg shadow-lg shadow-primary/20 hover:opacity-95 transition-all transform active:scale-[0.98]" type="submit">
+                        Log In
+                    </button>
+<button class="w-full py-4 bg-surface-container-highest text-on-surface font-label font-semibold rounded-lg hover:bg-surface-dim transition-all" type="button">
+                        Create an Account
+                    </button>
+</div>
+</form>
+<!-- Social/Alternative Entry (Contextual Addition) -->
+<div class="mt-10 pt-8 border-t border-outline-variant/20">
+<p class="text-center text-[10px] uppercase tracking-[0.2em] text-outline font-label mb-6">Or continue with</p>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 py-3 bg-surface-container-lowest rounded-lg text-sm font-medium border border-outline-variant/15 hover:bg-surface-container transition-colors">
+<img alt="Google" class="w-4 h-4 opacity-70" data-alt="Google colorful logo icon small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPZBxU0aLjaQL0x-1IFZd7QcB-dq5LuARfww8NUWN5LOnNK1nW_DtB37MZDzViRUg_2aOrcEht6UI0e3vWqIYvYrNpjv5agtwHIOiARIC3iEkGD9zJSrmsDWyhCFXS0pMJ2wbs4rzMQTqmIgN3LPi1b4ehUfOq_eXtwri-MTByUOaTYC1xm6wvIdMKpKQKUfTgbObU-mFvz4u38GUPCjyBgukP6xHPx6k1BMrqih52jGKy9qPUrM4uOAW6RH62sAHlm093MbMXSAk"/>
+<span>Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-3 bg-surface-container-lowest rounded-lg text-sm font-medium border border-outline-variant/15 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined scale-90">grid_view</span>
+<span>Apple</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer (No-Line Rule Applied) -->
+<footer class="relative z-10 w-full py-8 text-center bg-stone-100/50 backdrop-blur-sm">
+<div class="max-w-7xl mx-auto px-12 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-xs font-body text-stone-500">© 2024 The Olfactory Archive. All rights reserved.</span>
+<div class="flex gap-8">
+<a class="text-xs font-label text-stone-500 hover:text-stone-900 transition-colors" href="#">Terms of Service</a>
+<a class="text-xs font-label text-stone-500 hover:text-stone-900 transition-colors" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</body></html>

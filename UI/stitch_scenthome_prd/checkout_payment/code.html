@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | ScentHome</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Newsreader & Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#fbf9f5",
+              "tertiary-container": "#4c7c7f",
+              "tertiary-fixed": "#b9ecee",
+              "on-error": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "surface-bright": "#fbf9f5",
+              "primary-fixed": "#fdddb9",
+              "tertiary-fixed-dim": "#9ecfd1",
+              "on-tertiary-fixed": "#002021",
+              "surface-container-highest": "#e4e2de",
+              "surface-container-low": "#f5f3ef",
+              "error": "#ba1a1a",
+              "secondary-container": "#d3e4d2",
+              "outline": "#7f756b",
+              "on-primary-fixed-variant": "#584329",
+              "on-tertiary-fixed-variant": "#1a4e50",
+              "secondary-fixed": "#d6e7d5",
+              "surface-container": "#efeeea",
+              "surface-dim": "#dbdad6",
+              "primary": "#6f583c",
+              "on-primary-container": "#fffbff",
+              "on-secondary-fixed": "#111f13",
+              "inverse-on-surface": "#f2f0ed",
+              "on-surface-variant": "#4e453c",
+              "outline-variant": "#d1c4b9",
+              "inverse-primary": "#e0c29f",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#f2ffff",
+              "on-primary": "#ffffff",
+              "tertiary": "#336366",
+              "secondary": "#536254",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed": "#281803",
+              "secondary-fixed-dim": "#bacbb9",
+              "surface": "#fbf9f5",
+              "surface-container-high": "#eae8e4",
+              "error-container": "#ffdad6",
+              "on-background": "#1b1c1a",
+              "surface-variant": "#e4e2de"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body { font-family: 'Manrope', sans-serif; background-color: #fbf9f5; color: #1b1c1a; }
+        .font-serif { font-family: 'Newsreader', serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed">
+<!-- TopNavBar (Shared Component) - Suppressed because it's a transactional checkout screen -->
+<header class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-7xl mx-auto">
+<div class="text-2xl font-serif italic text-stone-900 dark:text-stone-50">ScentHome</div>
+<div class="flex items-center gap-4">
+<span class="text-sm font-medium text-stone-500 uppercase tracking-widest">Secure Checkout</span>
+<span class="material-symbols-outlined text-stone-400" data-icon="lock">lock</span>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto min-h-screen">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+<!-- Left Column: Order Summary (Sticky) -->
+<div class="lg:col-span-5 order-2 lg:order-1">
+<div class="lg:sticky lg:top-32 space-y-10">
+<section>
+<h2 class="text-3xl font-serif mb-8 text-on-surface">Order Summary</h2>
+<!-- Scent Profile Detail Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm overflow-hidden flex gap-6 items-start">
+<div class="w-32 h-40 flex-shrink-0 bg-surface-container rounded-xl overflow-hidden">
+<img alt="Artisanal glass bottle with wooden stopper" class="w-full h-full object-cover" data-alt="Close-up of a minimalist artisanal perfume bottle with a dark wooden stopper on a textured stone surface with soft morning light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBhwU5orTVRl7LoIlVelEAA2HFh22IVmsePbDESzgV8QudeM6PVAMxFYbBzbnhUks3Xj4nrBELjs5itNaDYiAwelrGlE1_37shgJ_kOvd9Zd6XUObA0oHzzb9rQvaSrGIzDohKDled4eIVQJp-H45cpXPj-JPcIR0mwA73IdXZABCkQc8hyGILJybjfl3bZQmoBkqS4VoTxbDUAzPVSyIUvFg5l6ooEbw28DnF3q3w3vJjd6dCiRQz5lVLGqvvihjQtoi_iM6Ewpk"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h3 class="text-xl font-serif leading-tight">The Rain Over Cedar</h3>
+<p class="text-sm text-on-surface-variant mt-2 font-medium">Custom Scent Synthesis Kit (10ml)</p>
+<p class="text-xs text-on-surface-variant/70 mt-1 italic italic">Notes: Wet Earth, Aged Wood, Moss, Ozone</p>
+</div>
+<div class="mt-4">
+<span class="text-lg font-serif">$124.00</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Price Breakdown -->
+<section class="space-y-4 pt-4">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="text-sm font-label">Subtotal</span>
+<span class="text-sm font-medium">$124.00</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="text-sm font-label">Shipping</span>
+<span class="text-sm font-medium">Calculated at next step</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="text-sm font-label">Taxes (Estimated)</span>
+<span class="text-sm font-medium">$10.20</span>
+</div>
+<div class="pt-6 border-t border-outline-variant/20 flex justify-between items-end">
+<span class="text-lg font-serif">Total</span>
+<div class="text-right">
+<span class="text-xs text-on-surface-variant block uppercase tracking-tighter">USD</span>
+<span class="text-3xl font-serif font-bold text-primary">$134.20</span>
+</div>
+</div>
+</section>
+<!-- Trust Signals -->
+<div class="grid grid-cols-2 gap-4 pt-8">
+<div class="flex items-center gap-3 p-4 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary" data-icon="verified">verified</span>
+<span class="text-xs font-medium">Pure Extracts</span>
+</div>
+<div class="flex items-center gap-3 p-4 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary" data-icon="eco">eco</span>
+<span class="text-xs font-medium">Sustainably Sourced</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Payment & Shipping -->
+<div class="lg:col-span-7 order-1 lg:order-2">
+<div class="space-y-12">
+<!-- Shipping Section -->
+<section>
+<div class="flex items-center gap-4 mb-8">
+<span class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-serif italic">1</span>
+<h2 class="text-2xl font-serif">Shipping Address</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="md:col-span-1">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant mb-2">First Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-tertiary/20 focus:bg-surface-container-high transition-all outline-none" placeholder="Julianne" type="text"/>
+</div>
+<div class="md:col-span-1">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant mb-2">Last Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-tertiary/20 focus:bg-surface-container-high transition-all outline-none" placeholder="Vandermeer" type="text"/>
+</div>
+<div class="md:col-span-2">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant mb-2">Street Address</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-tertiary/20 focus:bg-surface-container-high transition-all outline-none" placeholder="1248 Oakwood Avenue" type="text"/>
+</div>
+<div class="md:col-span-1">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant mb-2">City</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-tertiary/20 focus:bg-surface-container-high transition-all outline-none" placeholder="Portland" type="text"/>
+</div>
+<div class="md:col-span-1">
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant mb-2">Postal Code</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-tertiary/20 focus:bg-surface-container-high transition-all outline-none" placeholder="97201" type="text"/>
+</div>
+</div>
+</section>
+<!-- Payment Section -->
+<section>
+<div class="flex items-center gap-4 mb-8">
+<span class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-serif italic">2</span>
+<h2 class="text-2xl font-serif">Payment Method</h2>
+</div>
+<div class="p-8 bg-surface-container-low rounded-2xl space-y-6">
+<div class="flex justify-between items-center mb-4">
+<span class="text-sm font-medium">Credit or Debit Card</span>
+<div class="flex gap-2">
+<div class="w-8 h-5 bg-on-surface-variant/10 rounded flex items-center justify-center text-[10px] font-bold">VISA</div>
+<div class="w-8 h-5 bg-on-surface-variant/10 rounded flex items-center justify-center text-[10px] font-bold">MC</div>
+</div>
+</div>
+<div>
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant mb-2">Card Number</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-2 focus:ring-tertiary/20 focus:bg-white transition-all outline-none" placeholder="0000 0000 0000 0000" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/40" data-icon="credit_card">credit_card</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div>
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant mb-2">Expiry Date</label>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-2 focus:ring-tertiary/20 focus:bg-white transition-all outline-none" placeholder="MM / YY" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant mb-2">CVC</label>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-2 focus:ring-tertiary/20 focus:bg-white transition-all outline-none" placeholder="•••" type="password"/>
+</div>
+</div>
+<div class="flex items-center gap-3 pt-2">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary border-outline-variant" id="save-card" type="checkbox"/>
+<label class="text-sm text-on-surface-variant" for="save-card">Securely save card for future olfactory curation</label>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<div class="pt-8 space-y-6">
+<button class="w-full py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary font-medium text-lg rounded-xl shadow-lg shadow-primary/10 hover:shadow-primary/20 hover:scale-[1.01] active:scale-[0.98] transition-all duration-300">
+                            Complete Purchase
+                        </button>
+<div class="text-center">
+<a class="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform" data-icon="arrow_back">arrow_back</span>
+<span class="border-b border-primary/30">Return to Scent Profile</span>
+</a>
+</div>
+</div>
+<div class="pt-12 text-center">
+<p class="text-xs text-on-surface-variant/60 max-w-sm mx-auto leading-relaxed">
+                            Your transaction is protected by 256-bit AES encryption. By clicking "Complete Purchase", you agree to our Terms of Scent curation.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-12 mt-20 bg-stone-100 dark:bg-stone-900 border-t border-stone-200/10 dark:border-stone-800/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto space-y-8 md:space-y-0">
+<div class="text-xl font-serif text-stone-800 dark:text-stone-200">ScentHome</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-sm font-sans text-stone-500 dark:text-stone-400 hover:underline decoration-stone-400" href="#">Terms of Service</a>
+<a class="text-sm font-sans text-stone-500 dark:text-stone-400 hover:underline decoration-stone-400" href="#">Privacy Policy</a>
+<a class="text-sm font-sans text-stone-500 dark:text-stone-400 hover:underline decoration-stone-400" href="#">Contact Curator</a>
+<a class="text-sm font-sans text-stone-500 dark:text-stone-400 hover:underline decoration-stone-400" href="#">The Process</a>
+</div>
+<div class="text-xs font-sans text-stone-500 dark:text-stone-400">
+                © 2024 The Olfactory Archive. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>
