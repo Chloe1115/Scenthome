@@ -35,47 +35,6 @@ const SUPABASE_CONFIGURED = Boolean(
   process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 );
 
-const HERO_BOTTLE_SVG = `data:image/svg+xml;utf8,${encodeURIComponent(`
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
-    <defs>
-      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#f7efe6"/>
-        <stop offset="45%" stop-color="#eed8c1"/>
-        <stop offset="100%" stop-color="#d8b89c"/>
-      </linearGradient>
-      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#fff8f2" stop-opacity="0.95"/>
-        <stop offset="100%" stop-color="#f0d6b8" stop-opacity="0.78"/>
-      </linearGradient>
-      <linearGradient id="perfume" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#f6d9b8"/>
-        <stop offset="100%" stop-color="#dfab72"/>
-      </linearGradient>
-      <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
-        <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#8d6a49" flood-opacity="0.24"/>
-      </filter>
-    </defs>
-    <rect width="800" height="1000" fill="url(#bg)"/>
-    <circle cx="180" cy="190" r="115" fill="#fff5ea" fill-opacity="0.7"/>
-    <circle cx="655" cy="250" r="130" fill="#f6dbc0" fill-opacity="0.6"/>
-    <path d="M132 776c56-144 148-220 278-228 137-8 221 54 270 198-135 78-387 112-548 30Z" fill="#caa27d" fill-opacity="0.18"/>
-    <g filter="url(#shadow)">
-      <rect x="320" y="176" width="160" height="92" rx="22" fill="#39281d"/>
-      <rect x="346" y="98" width="108" height="92" rx="20" fill="#52382a"/>
-      <rect x="280" y="246" width="240" height="400" rx="54" fill="url(#glass)" stroke="#f9ecdd" stroke-width="8"/>
-      <rect x="302" y="370" width="196" height="232" rx="38" fill="url(#perfume)" fill-opacity="0.95"/>
-      <rect x="316" y="280" width="168" height="82" rx="18" fill="#fffaf4" fill-opacity="0.32"/>
-      <path d="M344 466c34-22 70-32 110-32 16 0 36 2 58 8-12 58-54 116-128 168-29-20-52-41-72-66 24-23 35-53 32-78Z" fill="#fff7ef" fill-opacity="0.22"/>
-      <rect x="348" y="660" width="104" height="10" rx="5" fill="#c79a6d" fill-opacity="0.45"/>
-    </g>
-    <g fill="#fff4e4" fill-opacity="0.95">
-      <path d="M158 704c18-24 34-39 56-49-3 21 4 40 19 57-20 7-38 4-56-8-7 18-20 31-40 39 3-15 10-28 21-39-18-3-32-10-42-22 19-6 33-4 42 6Z"/>
-      <path d="M591 624c22-29 41-47 69-59-4 24 5 48 24 69-24 8-47 5-68-10-9 21-25 38-49 48 4-19 13-34 28-48-22-4-38-13-51-27 24-8 40-6 47 8Z"/>
-      <path d="M610 804c12-16 24-26 40-33-2 15 3 28 14 40-14 4-29 3-40-7-5 12-15 22-30 28 2-11 8-20 16-28-13-2-22-7-30-16 13-4 23-3 30 4Z"/>
-    </g>
-  </svg>
-`)}`;
-
 function buildDraft({
   narrative,
   emotions,
@@ -623,19 +582,43 @@ export function HomePage({ initialUser, initialIsAdmin }: HomePageProps) {
 
           <MotionReveal as="div" className="relative" delay={140}>
             <div className="relative">
-            <div className="floating-slow overflow-hidden rounded-[2rem] bg-surface-low shadow-ambient">
-              <img
-                src={HERO_BOTTLE_SVG}
-                alt="ScentHome hero visual"
-                className="aspect-[4/5] h-full w-full object-cover opacity-90 mix-blend-multiply"
-              />
-            </div>
-            <div className="glass-panel ghost-border soft-panel-enter absolute -bottom-10 left-4 hidden max-w-sm rounded-[1.75rem] p-6 shadow-glow md:block">
-              <p className="font-headline text-2xl italic text-foreground">
-                “小时候下雨后，院子里湿土和木门混在一起的味道。”
-              </p>
-              <p className="mt-2 text-sm text-muted">系统会把这样的记忆线索转译成一支可体验的乡愁方案。</p>
-            </div>
+              <div className="floating-slow relative aspect-[4/5] overflow-hidden rounded-[2.3rem] border border-white/45 bg-[linear-gradient(140deg,#f8f1e9_0%,#ead8c7_34%,#d6ba9d_100%)] shadow-[0_35px_90px_rgba(111,88,60,0.22)]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(255,248,238,0.95),transparent_24%),radial-gradient(circle_at_76%_18%,rgba(255,235,211,0.8),transparent_22%),linear-gradient(180deg,rgba(255,255,255,0.35),transparent_42%)]" />
+                <div className="absolute inset-x-10 bottom-6 h-14 rounded-full bg-[radial-gradient(circle,rgba(73,49,28,0.28),transparent_70%)] blur-2xl" />
+                <div className="absolute bottom-0 left-1/2 h-[34%] w-[78%] -translate-x-1/2 rounded-t-[3rem] bg-[linear-gradient(180deg,rgba(186,151,117,0.18),rgba(140,106,79,0.42))]" />
+                <div className="absolute bottom-[12%] left-[12%] h-[46%] w-[17%] rounded-[999px] bg-[linear-gradient(180deg,rgba(202,173,141,0.8),rgba(132,96,67,0.28))] opacity-85 blur-[0.5px]" />
+                <div className="absolute bottom-[14%] right-[14%] h-[44%] w-[18%] rounded-[999px] bg-[linear-gradient(180deg,rgba(236,217,193,0.9),rgba(145,112,84,0.28))] opacity-90 blur-[0.5px]" />
+                <div className="absolute bottom-[18%] left-[20%] h-[16%] w-[10%] rotate-[-24deg] rounded-full bg-[radial-gradient(circle,#fbf0e5_0%,rgba(251,240,229,0.2)_72%,transparent_74%)] opacity-90" />
+                <div className="absolute bottom-[15%] right-[22%] h-[13%] w-[8%] rotate-[16deg] rounded-full bg-[radial-gradient(circle,#f7ecde_0%,rgba(247,236,222,0.2)_72%,transparent_74%)] opacity-80" />
+                <div className="absolute left-1/2 top-[16%] h-[62%] w-[34%] -translate-x-1/2">
+                  <div className="absolute left-1/2 top-0 h-[13%] w-[24%] -translate-x-1/2 rounded-t-[1.2rem] rounded-b-[0.7rem] bg-[linear-gradient(180deg,#5f4431,#362116)] shadow-[0_12px_24px_rgba(45,27,15,0.26)]" />
+                  <div className="absolute left-1/2 top-[10%] h-[10%] w-[34%] -translate-x-1/2 rounded-[1rem] bg-[linear-gradient(180deg,#72543f,#4f3727)]" />
+                  <div className="absolute left-1/2 top-[18%] h-[70%] w-full -translate-x-1/2 rounded-[3rem] border border-white/40 bg-[linear-gradient(180deg,rgba(255,250,244,0.84),rgba(250,233,217,0.56)_34%,rgba(241,210,182,0.52)_100%)] shadow-[0_30px_55px_rgba(96,62,35,0.24)] backdrop-blur-[2px]" />
+                  <div className="absolute left-1/2 top-[23%] h-[8%] w-[76%] -translate-x-1/2 rounded-[1rem] border border-white/40 bg-white/20" />
+                  <div className="absolute left-1/2 top-[44%] h-[31%] w-[82%] -translate-x-1/2 rounded-[2rem] bg-[linear-gradient(180deg,rgba(232,189,142,0.9),rgba(199,137,74,0.92))]" />
+                  <div className="absolute left-1/2 top-[47%] h-[25%] w-[66%] -translate-x-1/2 rounded-[1.5rem] border border-white/30 bg-[linear-gradient(180deg,rgba(255,250,245,0.85),rgba(250,241,232,0.64))] shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]" />
+                  <div className="absolute left-1/2 top-[51%] w-[50%] -translate-x-1/2 text-center">
+                    <p className="font-headline text-[1.3rem] italic tracking-[0.08em] text-[#5b402d]">ScentHome</p>
+                    <p className="mt-1 text-[0.62rem] uppercase tracking-[0.34em] text-[#8b6a4c]">Archive No. 01</p>
+                  </div>
+                  <div className="absolute right-[18%] top-[30%] h-[20%] w-[10%] rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,0.68),rgba(255,255,255,0.04))] blur-[1px]" />
+                </div>
+                <div className="absolute right-[9%] top-[12%] hidden w-[34%] rounded-[1.5rem] border border-white/45 bg-white/24 p-5 shadow-[0_20px_45px_rgba(83,58,33,0.16)] backdrop-blur-xl md:block">
+                  <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[#826043]">Curated Atmosphere</p>
+                  <p className="mt-3 font-headline text-2xl italic leading-tight text-[#3f2a1d]">
+                    Soft morning light, stone pedestal, preserved botanicals.
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-[#6f5542]">
+                    让首页更像香水 campaign，而不是一张硬塞进去的生成图。
+                  </p>
+                </div>
+              </div>
+              <div className="glass-panel ghost-border soft-panel-enter absolute -bottom-10 left-4 hidden max-w-sm rounded-[1.75rem] p-6 shadow-glow md:block">
+                <p className="font-headline text-2xl italic text-foreground">
+                  “小时候下雨后，院子里湿土和木门混在一起的味道。”
+                </p>
+                <p className="mt-2 text-sm text-muted">系统会把这样的记忆线索转译成一支可体验的乡愁方案。</p>
+              </div>
             </div>
           </MotionReveal>
         </div>
