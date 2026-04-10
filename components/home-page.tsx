@@ -35,6 +35,47 @@ const SUPABASE_CONFIGURED = Boolean(
   process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 );
 
+const HERO_BOTTLE_SVG = `data:image/svg+xml;utf8,${encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#f7efe6"/>
+        <stop offset="45%" stop-color="#eed8c1"/>
+        <stop offset="100%" stop-color="#d8b89c"/>
+      </linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#fff8f2" stop-opacity="0.95"/>
+        <stop offset="100%" stop-color="#f0d6b8" stop-opacity="0.78"/>
+      </linearGradient>
+      <linearGradient id="perfume" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f6d9b8"/>
+        <stop offset="100%" stop-color="#dfab72"/>
+      </linearGradient>
+      <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+        <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#8d6a49" flood-opacity="0.24"/>
+      </filter>
+    </defs>
+    <rect width="800" height="1000" fill="url(#bg)"/>
+    <circle cx="180" cy="190" r="115" fill="#fff5ea" fill-opacity="0.7"/>
+    <circle cx="655" cy="250" r="130" fill="#f6dbc0" fill-opacity="0.6"/>
+    <path d="M132 776c56-144 148-220 278-228 137-8 221 54 270 198-135 78-387 112-548 30Z" fill="#caa27d" fill-opacity="0.18"/>
+    <g filter="url(#shadow)">
+      <rect x="320" y="176" width="160" height="92" rx="22" fill="#39281d"/>
+      <rect x="346" y="98" width="108" height="92" rx="20" fill="#52382a"/>
+      <rect x="280" y="246" width="240" height="400" rx="54" fill="url(#glass)" stroke="#f9ecdd" stroke-width="8"/>
+      <rect x="302" y="370" width="196" height="232" rx="38" fill="url(#perfume)" fill-opacity="0.95"/>
+      <rect x="316" y="280" width="168" height="82" rx="18" fill="#fffaf4" fill-opacity="0.32"/>
+      <path d="M344 466c34-22 70-32 110-32 16 0 36 2 58 8-12 58-54 116-128 168-29-20-52-41-72-66 24-23 35-53 32-78Z" fill="#fff7ef" fill-opacity="0.22"/>
+      <rect x="348" y="660" width="104" height="10" rx="5" fill="#c79a6d" fill-opacity="0.45"/>
+    </g>
+    <g fill="#fff4e4" fill-opacity="0.95">
+      <path d="M158 704c18-24 34-39 56-49-3 21 4 40 19 57-20 7-38 4-56-8-7 18-20 31-40 39 3-15 10-28 21-39-18-3-32-10-42-22 19-6 33-4 42 6Z"/>
+      <path d="M591 624c22-29 41-47 69-59-4 24 5 48 24 69-24 8-47 5-68-10-9 21-25 38-49 48 4-19 13-34 28-48-22-4-38-13-51-27 24-8 40-6 47 8Z"/>
+      <path d="M610 804c12-16 24-26 40-33-2 15 3 28 14 40-14 4-29 3-40-7-5 12-15 22-30 28 2-11 8-20 16-28-13-2-22-7-30-16 13-4 23-3 30 4Z"/>
+    </g>
+  </svg>
+`)}`;
+
 function buildDraft({
   narrative,
   emotions,
@@ -584,7 +625,7 @@ export function HomePage({ initialUser, initialIsAdmin }: HomePageProps) {
             <div className="relative">
             <div className="floating-slow overflow-hidden rounded-[2rem] bg-surface-low shadow-ambient">
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPMizHuIBD95H7xN91B8fTr8CeLUawJTS_pctffd3H10oP2p-7m3EVfbKb5hRmoGuGQHNb0YNQJdEPH2MDytllzWfp7xlwn14rhjoVPQEuUtz_SlBEkz_EHW5w2AZMgKExUb4USe-5sjEOu_oCdloawSBKr04j5bWNBVyQlQWDpMjGQy0HCQ-eWVSQniH8BO-4Co4A6K-5lCd_Hud4hBG0qbaRFqfBgK0oG16uI5u6wwsR67luV9zyucdJY1WyvSu5PKo-ge0xhKo"
+                src={HERO_BOTTLE_SVG}
                 alt="ScentHome hero visual"
                 className="aspect-[4/5] h-full w-full object-cover opacity-90 mix-blend-multiply"
               />

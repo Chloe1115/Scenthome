@@ -44,7 +44,4 @@ export type ShippingFormValues = {
   city: string;
   postalCode: string;
   country: string;
-  cardNumber: string;
-  expiryDate: string;
-  cvc: string;
 };

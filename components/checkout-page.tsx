@@ -8,7 +8,7 @@ import { SignOutButton } from "@/components/sign-out-button";
 import { clearPendingIntent, readDraftFromSession, saveDraftToSession } from "@/lib/client-draft";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import type { AppUser, ShippingFormValues, ScentDraft } from "@/lib/types";
-import { formatPrice, maskCardNumber, slugify } from "@/lib/utils";
+import { formatPrice, slugify } from "@/lib/utils";
 
 type CheckoutPageProps = {
   initialUser: AppUser;
@@ -26,10 +26,7 @@ const defaultForm: ShippingFormValues = {
   street: "",
   city: "",
   postalCode: "",
-  country: "中国",
-  cardNumber: "",
-  expiryDate: "",
-  cvc: "",
+  country: "China",
 };
 
 async function uploadDraftImage(userId: string, draft: ScentDraft) {
@@ -77,6 +74,18 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
   }, []);
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("canceled") === "1") {
+      setError("Stripe payment was canceled. Your draft is still here, so you can try again whenever you are ready.");
+    }
+  }, []);
+
+  useEffect(() => {
     if (!currentUser?.email) {
       return;
     }
@@ -108,12 +117,12 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
     setError(null);
 
     if (!draft?.generatedProfile) {
-      setError("当前没有可购买的方案，请先回首页生成内容。");
+      setError("There is no product to purchase yet. Please generate a scent profile first.");
       return;
     }
 
     if (!SUPABASE_CONFIGURED) {
-      setError("还没有配置 Supabase 环境变量，订单暂时无法提交。");
+      setError("Supabase is not configured yet, so Stripe checkout cannot start.");
       return;
     }
 
@@ -125,10 +134,11 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
         ...draft,
         imagePath: uploadedPath,
       };
+
       saveDraftToSession(nextDraft);
       setDraft(nextDraft);
 
-      const response = await fetch("/api/orders", {
+      const response = await fetch("/api/stripe/checkout-session", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -145,26 +155,24 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
             postal_code: formValues.postalCode,
             country: formValues.country,
           },
-          paymentSummary: {
-            brand: "card",
-            last4: maskCardNumber(formValues.cardNumber).slice(-4),
-          },
         }),
       });
 
+      const payload = (await response.json().catch(() => null)) as { error?: string; url?: string } | null;
+
       if (!response.ok) {
-        const payload = (await response.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(payload?.error ?? "订单提交失败，请稍后再试。");
+        throw new Error(payload?.error ?? "Unable to start Stripe Checkout. Please try again.");
+      }
+
+      if (!payload?.url) {
+        throw new Error("Stripe Checkout URL was not returned.");
       }
 
       clearPendingIntent();
-      setMessage(
-        currentUser
-          ? "订单已提交到 Supabase。这个 MVP 版本不会实际扣款，但会完整记录订单与收货信息。"
-          : "访客订单已提交。我们会用你填写的邮箱作为联系凭证；如果后续想保存方案，再创建账户即可。",
-      );
+      setMessage("Redirecting you to Stripe Checkout...");
+      window.location.assign(payload.url);
     } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : "提交失败，请稍后再试。");
+      setError(submitError instanceof Error ? submitError.message : "Unable to start Stripe Checkout.");
     } finally {
       setIsSubmitting(false);
     }
@@ -174,15 +182,15 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
     return (
       <main className="flex min-h-screen items-center justify-center px-6">
         <div className="soft-panel-enter max-w-xl rounded-[2rem] bg-surface p-10 text-center shadow-ambient">
-          <h1 className="font-headline text-4xl text-foreground">还没有可结算的方案</h1>
+          <h1 className="font-headline text-4xl text-foreground">No checkout item yet</h1>
           <p className="mt-4 text-sm leading-7 text-muted">
-            请先回首页输入记忆并生成专属香气方案，然后再进入购买流程。
+            Generate a scent memory first, then come back here to complete payment with Stripe.
           </p>
           <Link
             href="/"
             className="mt-8 inline-flex rounded-full bg-gradient-to-br from-primary to-primary-soft px-6 py-3 text-sm font-bold text-white"
           >
-            返回首页
+            Return home
           </Link>
         </div>
       </main>
@@ -194,7 +202,7 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
       <header className="fixed inset-x-0 top-0 z-40 border-b border-outline-variant/10 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
           <Link href="/" className="font-headline text-2xl italic text-foreground">
-            乡忆 ScentHome
+            ScentHome
           </Link>
           <div className="flex items-center gap-3">
             <div className="text-sm uppercase tracking-[0.3em] text-muted">Secure Checkout</div>
@@ -203,7 +211,7 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
                 href="/admin"
                 className="rounded-full bg-surface-high px-4 py-2 text-sm font-medium text-muted transition hover:bg-surface-highest hover:text-foreground"
               >
-                后台
+                Admin
               </Link>
             ) : null}
             {currentUser ? (
@@ -222,7 +230,7 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
         <MotionReveal as="aside" className="lg:col-span-5" delay={40}>
           <div className="space-y-8 lg:sticky lg:top-28">
             <section>
-              <h2 className="font-headline text-4xl text-foreground">订单概览</h2>
+              <h2 className="font-headline text-4xl text-foreground">Order Summary</h2>
               <div className="mt-8 flex gap-5 rounded-[2rem] bg-surface p-6 shadow-ambient">
                 <div className="w-28 shrink-0 overflow-hidden rounded-[1.25rem] bg-surface-low">
                   {draft.image ? (
@@ -247,16 +255,16 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
 
             <section className="space-y-4 rounded-[2rem] bg-surface p-6 shadow-sm">
               <div className="flex items-center justify-between text-sm text-muted">
-                <span>商品金额</span>
+                <span>Product</span>
                 <span>{formatPrice(draft.generatedProfile.price)}</span>
               </div>
               <div className="flex items-center justify-between text-sm text-muted">
-                <span>运费</span>
+                <span>Shipping</span>
                 <span>{formatPrice(18)}</span>
               </div>
               <div className="border-t border-outline-variant/20 pt-4">
                 <div className="flex items-end justify-between">
-                  <span className="font-headline text-2xl text-foreground">总计</span>
+                  <span className="font-headline text-2xl text-foreground">Total</span>
                   <span className="font-headline text-3xl text-primary">{formatPrice(totalPrice)}</span>
                 </div>
               </div>
@@ -274,7 +282,7 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-headline italic text-white">
                   1
                 </span>
-                <h2 className="font-headline text-3xl text-foreground">收货地址</h2>
+                <h2 className="font-headline text-3xl text-foreground">Shipping Details</h2>
               </div>
 
               <div
@@ -283,53 +291,60 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
                 }`}
               >
                 {currentUser
-                  ? "你已登录，订单会和当前账户关联，邮箱也会自动带入。"
-                  : "你正在以访客身份下单，不需要先登录；请填写邮箱，方便后续联系与确认订单。"}
+                  ? "Your order will be linked to the signed-in account, and we will prefill the contact email."
+                  : "You can still check out as a guest. We will use the email below for payment receipts and order follow-up."}
               </div>
 
               <div className="grid gap-5 md:grid-cols-2">
                 <input
                   required
                   type="email"
-                  placeholder="联系邮箱"
+                  placeholder="Email"
                   value={formValues.email}
                   onChange={(event) => updateField("email", event.target.value)}
                   className="rounded-2xl border-none bg-surface-low px-4 py-4 outline-none transition focus:bg-surface-high md:col-span-2"
                 />
                 <input
                   required
-                  placeholder="名"
+                  placeholder="First name"
                   value={formValues.firstName}
                   onChange={(event) => updateField("firstName", event.target.value)}
                   className="rounded-2xl border-none bg-surface-low px-4 py-4 outline-none transition focus:bg-surface-high"
                 />
                 <input
                   required
-                  placeholder="姓"
+                  placeholder="Last name"
                   value={formValues.lastName}
                   onChange={(event) => updateField("lastName", event.target.value)}
                   className="rounded-2xl border-none bg-surface-low px-4 py-4 outline-none transition focus:bg-surface-high"
                 />
                 <input
                   required
-                  placeholder="街道地址"
+                  placeholder="Street address"
                   value={formValues.street}
                   onChange={(event) => updateField("street", event.target.value)}
                   className="rounded-2xl border-none bg-surface-low px-4 py-4 outline-none transition focus:bg-surface-high md:col-span-2"
                 />
                 <input
                   required
-                  placeholder="城市"
+                  placeholder="City"
                   value={formValues.city}
                   onChange={(event) => updateField("city", event.target.value)}
                   className="rounded-2xl border-none bg-surface-low px-4 py-4 outline-none transition focus:bg-surface-high"
                 />
                 <input
                   required
-                  placeholder="邮编"
+                  placeholder="Postal code"
                   value={formValues.postalCode}
                   onChange={(event) => updateField("postalCode", event.target.value)}
                   className="rounded-2xl border-none bg-surface-low px-4 py-4 outline-none transition focus:bg-surface-high"
+                />
+                <input
+                  required
+                  placeholder="Country"
+                  value={formValues.country}
+                  onChange={(event) => updateField("country", event.target.value)}
+                  className="rounded-2xl border-none bg-surface-low px-4 py-4 outline-none transition focus:bg-surface-high md:col-span-2"
                 />
               </div>
             </div>
@@ -339,36 +354,17 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-headline italic text-white">
                   2
                 </span>
-                <h2 className="font-headline text-3xl text-foreground">付款信息</h2>
+                <h2 className="font-headline text-3xl text-foreground">Stripe Payment</h2>
               </div>
 
-              <div className="space-y-5 rounded-[2rem] bg-surface-low p-6">
-                <input
-                  required
-                  placeholder="卡号"
-                  value={formValues.cardNumber}
-                  onChange={(event) => updateField("cardNumber", event.target.value)}
-                  className="w-full rounded-2xl border-none bg-white px-4 py-4 outline-none"
-                />
-                <div className="grid gap-5 md:grid-cols-2">
-                  <input
-                    required
-                    placeholder="MM / YY"
-                    value={formValues.expiryDate}
-                    onChange={(event) => updateField("expiryDate", event.target.value)}
-                    className="rounded-2xl border-none bg-white px-4 py-4 outline-none"
-                  />
-                  <input
-                    required
-                    placeholder="CVC"
-                    value={formValues.cvc}
-                    onChange={(event) => updateField("cvc", event.target.value)}
-                    className="rounded-2xl border-none bg-white px-4 py-4 outline-none"
-                  />
-                </div>
-                <p className="text-xs leading-6 text-muted">
-                  出于安全考虑，本项目不会存储完整卡号；只会在订单记录里保留末四位用于示例订单展示。
+              <div className="space-y-4 rounded-[2rem] bg-surface-low p-6">
+                <p className="text-sm leading-7 text-muted">
+                  Card details are now handled by Stripe Checkout, not by this page. After you confirm the
+                  address above, we will redirect you to Stripe&apos;s secure hosted payment form.
                 </p>
+                <div className="rounded-[1.25rem] bg-white px-4 py-4 text-sm text-muted">
+                  Stripe manages card entry, 3D Secure authentication, and payment confirmation.
+                </div>
               </div>
             </div>
 
@@ -378,11 +374,11 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
                 disabled={isSubmitting}
                 className="w-full rounded-[1.25rem] bg-gradient-to-r from-primary to-primary-soft px-5 py-5 text-lg font-semibold text-white shadow-ambient transition disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {isSubmitting ? "提交中..." : "完成购买"}
+                {isSubmitting ? "Redirecting to Stripe..." : "Continue to secure payment"}
               </button>
               <div className="text-center">
                 <Link href="/" className="text-sm font-semibold text-primary underline underline-offset-4">
-                  返回方案页
+                  Return to your scent profile
                 </Link>
               </div>
             </div>

@@ -99,11 +99,7 @@ export function LoginForm({ intent, nextPath }: LoginFormProps) {
   return (
     <main className="relative flex min-h-screen flex-col overflow-hidden bg-background">
       <div className="absolute inset-0">
-        <img
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_-CLFN0_dDUuir3158RAtTq_TSIkyQJzGvglhbWRFlmsTItzHXbN9Fu_TZ7bacnokN4l6ak8O7Hc1K_3UExUhECb_-tYQT7fMw1tdQxkP6KipOVYk1otaE0Y9lL8zc-RfFJu7BzpwvkMhECrtPYkaG9SVyWGKD_c-tRBZ7x2IwKZfdqkfGPiYLB5xD_VNdwuJkKp1YsuRCUXW4m5w_WhOppMco4oIti8FARc__A9UvOvPJ8rhJr0-EsOCh1-40cy7SIg3ybZs28E"
-          alt="Login background"
-          className="h-full w-full scale-105 object-cover opacity-60 brightness-95"
-        />
+        <div className="h-full w-full bg-[radial-gradient(circle_at_20%_20%,rgba(255,245,234,0.95),transparent_22%),radial-gradient(circle_at_78%_24%,rgba(236,209,181,0.9),transparent_24%),radial-gradient(circle_at_50%_72%,rgba(214,184,154,0.55),transparent_30%),linear-gradient(140deg,#f8f4ee_0%,#f0e4d3_46%,#e0c4a6_100%)]" />
         <div className="absolute inset-0 bg-gradient-to-tr from-background via-background/50 to-tertiary-soft/10" />
       </div>
 
