@@ -582,34 +582,24 @@ export function HomePage({ initialUser, initialIsAdmin }: HomePageProps) {
 
           <MotionReveal as="div" className="relative" delay={140}>
             <div className="relative">
-              <div className="floating-slow relative aspect-[4/5] overflow-hidden rounded-[2.3rem] border border-white/45 bg-[linear-gradient(140deg,#f8f1e9_0%,#ead8c7_34%,#d6ba9d_100%)] shadow-[0_35px_90px_rgba(111,88,60,0.22)]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(255,248,238,0.95),transparent_24%),radial-gradient(circle_at_76%_18%,rgba(255,235,211,0.8),transparent_22%),linear-gradient(180deg,rgba(255,255,255,0.35),transparent_42%)]" />
-                <div className="absolute inset-x-10 bottom-6 h-14 rounded-full bg-[radial-gradient(circle,rgba(73,49,28,0.28),transparent_70%)] blur-2xl" />
-                <div className="absolute bottom-0 left-1/2 h-[34%] w-[78%] -translate-x-1/2 rounded-t-[3rem] bg-[linear-gradient(180deg,rgba(186,151,117,0.18),rgba(140,106,79,0.42))]" />
-                <div className="absolute bottom-[12%] left-[12%] h-[46%] w-[17%] rounded-[999px] bg-[linear-gradient(180deg,rgba(202,173,141,0.8),rgba(132,96,67,0.28))] opacity-85 blur-[0.5px]" />
-                <div className="absolute bottom-[14%] right-[14%] h-[44%] w-[18%] rounded-[999px] bg-[linear-gradient(180deg,rgba(236,217,193,0.9),rgba(145,112,84,0.28))] opacity-90 blur-[0.5px]" />
-                <div className="absolute bottom-[18%] left-[20%] h-[16%] w-[10%] rotate-[-24deg] rounded-full bg-[radial-gradient(circle,#fbf0e5_0%,rgba(251,240,229,0.2)_72%,transparent_74%)] opacity-90" />
-                <div className="absolute bottom-[15%] right-[22%] h-[13%] w-[8%] rotate-[16deg] rounded-full bg-[radial-gradient(circle,#f7ecde_0%,rgba(247,236,222,0.2)_72%,transparent_74%)] opacity-80" />
-                <div className="absolute left-1/2 top-[16%] h-[62%] w-[34%] -translate-x-1/2">
-                  <div className="absolute left-1/2 top-0 h-[13%] w-[24%] -translate-x-1/2 rounded-t-[1.2rem] rounded-b-[0.7rem] bg-[linear-gradient(180deg,#5f4431,#362116)] shadow-[0_12px_24px_rgba(45,27,15,0.26)]" />
-                  <div className="absolute left-1/2 top-[10%] h-[10%] w-[34%] -translate-x-1/2 rounded-[1rem] bg-[linear-gradient(180deg,#72543f,#4f3727)]" />
-                  <div className="absolute left-1/2 top-[18%] h-[70%] w-full -translate-x-1/2 rounded-[3rem] border border-white/40 bg-[linear-gradient(180deg,rgba(255,250,244,0.84),rgba(250,233,217,0.56)_34%,rgba(241,210,182,0.52)_100%)] shadow-[0_30px_55px_rgba(96,62,35,0.24)] backdrop-blur-[2px]" />
-                  <div className="absolute left-1/2 top-[23%] h-[8%] w-[76%] -translate-x-1/2 rounded-[1rem] border border-white/40 bg-white/20" />
-                  <div className="absolute left-1/2 top-[44%] h-[31%] w-[82%] -translate-x-1/2 rounded-[2rem] bg-[linear-gradient(180deg,rgba(232,189,142,0.9),rgba(199,137,74,0.92))]" />
-                  <div className="absolute left-1/2 top-[47%] h-[25%] w-[66%] -translate-x-1/2 rounded-[1.5rem] border border-white/30 bg-[linear-gradient(180deg,rgba(255,250,245,0.85),rgba(250,241,232,0.64))] shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]" />
-                  <div className="absolute left-1/2 top-[51%] w-[50%] -translate-x-1/2 text-center">
-                    <p className="font-headline text-[1.3rem] italic tracking-[0.08em] text-[#5b402d]">ScentHome</p>
-                    <p className="mt-1 text-[0.62rem] uppercase tracking-[0.34em] text-[#8b6a4c]">Archive No. 01</p>
-                  </div>
-                  <div className="absolute right-[18%] top-[30%] h-[20%] w-[10%] rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,0.68),rgba(255,255,255,0.04))] blur-[1px]" />
+              <div className="floating-slow group relative aspect-[4/5] overflow-hidden rounded-[2.3rem] border border-white/50 bg-[#efe8df] shadow-[0_35px_90px_rgba(111,88,60,0.18)]">
+                <img
+                  src="/hero-perfume.jpg"
+                  alt="Refined perfume bottle still life"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(249,244,239,0.08),rgba(86,58,34,0.2))]" />
+                <div className="absolute inset-y-0 right-0 w-[40%] bg-[linear-gradient(270deg,rgba(255,250,247,0.96),rgba(255,250,247,0))]" />
+                <div className="absolute left-7 top-7 rounded-full border border-white/55 bg-white/55 px-4 py-2 text-[0.65rem] uppercase tracking-[0.34em] text-[#7f6045] backdrop-blur-md">
+                  Editorial Still Life
                 </div>
-                <div className="absolute right-[9%] top-[12%] hidden w-[34%] rounded-[1.5rem] border border-white/45 bg-white/24 p-5 shadow-[0_20px_45px_rgba(83,58,33,0.16)] backdrop-blur-xl md:block">
-                  <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[#826043]">Curated Atmosphere</p>
-                  <p className="mt-3 font-headline text-2xl italic leading-tight text-[#3f2a1d]">
-                    Soft morning light, stone pedestal, preserved botanicals.
+                <div className="absolute bottom-7 right-7 hidden max-w-[48%] rounded-[1.5rem] border border-white/55 bg-white/62 p-5 shadow-[0_18px_40px_rgba(78,57,38,0.12)] backdrop-blur-xl md:block">
+                  <p className="text-[0.65rem] uppercase tracking-[0.32em] text-[#8a694d]">Scent Direction</p>
+                  <p className="mt-3 font-headline text-[1.8rem] italic leading-tight text-[#3f2a1d]">
+                    Warm glass, dried petals, quiet morning light.
                   </p>
                   <p className="mt-3 text-sm leading-6 text-[#6f5542]">
-                    让首页更像香水 campaign，而不是一张硬塞进去的生成图。
+                    这一版直接用真实摄影图，不再伪装成“像照片的插画”。
                   </p>
                 </div>
               </div>
