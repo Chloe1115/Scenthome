@@ -547,19 +547,22 @@ export function MultisensoryExperience({
   }));
 
   return (
-    <section className="experience-overlay fade-up-enter fixed inset-0 z-[90] overflow-hidden text-white">
-      <button type="button" aria-label="关闭体验" className="absolute inset-0" onClick={onClose} />
+    <section
+      className="experience-overlay fade-up-enter fixed inset-0 z-[90] overflow-y-auto overscroll-contain touch-pan-y text-white"
+      style={{ WebkitOverflowScrolling: "touch" }}
+    >
+      <button type="button" aria-label="关闭体验" className="absolute inset-0 z-0" onClick={onClose} />
 
       <div
-        className="absolute inset-0"
+        className="pointer-events-none absolute inset-0"
         style={{
           background: `${visualStyle.background}, radial-gradient(circle at center, rgba(7, 10, 11, 0.1), rgba(7, 10, 11, 0.55))`,
         }}
       />
-      <div className="experience-vignette absolute inset-0" />
-      <div className="experience-sweep absolute inset-0" />
+      <div className="experience-vignette pointer-events-none absolute inset-0" />
+      <div className="experience-sweep pointer-events-none absolute inset-0" />
       <div
-        className="experience-fog absolute inset-0"
+        className="experience-fog pointer-events-none absolute inset-0"
         style={{
           opacity: 0.26 + intensity * 0.05,
           background: `radial-gradient(circle at ${18 + stageIndex * 24}% ${24 + stageIndex * 10}%, ${visualStyle.glow}, transparent 30%), radial-gradient(circle at 78% 76%, ${visualStyle.accent}, transparent 38%)`,
@@ -568,7 +571,7 @@ export function MultisensoryExperience({
       {sensoryParticles.map((particle) => (
         <span
           key={particle.id}
-          className="experience-particle absolute rounded-full"
+          className="experience-particle pointer-events-none absolute rounded-full"
           style={{
             left: particle.left,
             top: particle.top,
@@ -578,10 +581,10 @@ export function MultisensoryExperience({
           }}
         />
       ))}
-      <div className="experience-ring absolute left-1/2 top-1/2 h-[72vmin] w-[72vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/12" />
-      <div className="experience-ring absolute left-1/2 top-1/2 h-[54vmin] w-[54vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
+      <div className="experience-ring pointer-events-none absolute left-1/2 top-1/2 h-[72vmin] w-[72vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/12" />
+      <div className="experience-ring pointer-events-none absolute left-1/2 top-1/2 h-[54vmin] w-[54vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
 
-      <div className="relative z-10 flex min-h-screen flex-col">
+      <div className="relative z-10 flex min-h-screen flex-col pointer-events-none">
         <div className="flex items-center justify-between px-5 py-5 md:px-8">
           <div className="rounded-full border border-white/14 bg-white/8 px-4 py-2 text-[11px] uppercase tracking-[0.34em] text-white/72">
             {plan.themeLabel}
@@ -592,30 +595,30 @@ export function MultisensoryExperience({
               onPlayingChange(false);
               onClose();
             }}
-            className="rounded-full border border-white/14 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-white/82 transition hover:bg-white/16"
+            className="pointer-events-auto rounded-full border border-white/14 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-white/82 transition hover:bg-white/16"
           >
             退出
           </button>
         </div>
 
-        <div className="flex flex-1 items-center justify-center px-6">
-          <div className="w-full max-w-5xl text-center">
+        <div className="flex flex-1 items-center justify-center px-4 py-6 sm:px-6">
+          <div className="pointer-events-none w-full max-w-5xl text-center">
             <div className="mx-auto max-w-3xl space-y-5">
               <p className="text-[11px] uppercase tracking-[0.5em] text-white/58">
                 {currentScene.stepLabel}
               </p>
-              <h2 className="font-headline text-5xl leading-[1.02] text-white md:text-7xl">
+              <h2 className="font-headline text-4xl leading-[1.02] text-white sm:text-5xl md:text-7xl">
                 {currentScene.title}
               </h2>
-              <p className="experience-narration mx-auto max-w-2xl text-lg leading-8 text-white/86 md:text-2xl md:leading-10">
+              <p className="experience-narration mx-auto max-w-2xl text-base leading-7 text-white/86 sm:text-lg sm:leading-8 md:text-2xl md:leading-10">
                 {currentScene.narration}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 px-5 pb-5 md:px-8 md:pb-8">
-          <div className="mx-auto max-w-6xl rounded-[2rem] border border-white/12 bg-black/18 p-4 backdrop-blur-2xl md:p-6">
+        <div className="relative z-10 px-4 pb-5 sm:px-5 md:px-8 md:pb-8">
+          <div className="pointer-events-auto mx-auto max-w-6xl rounded-[1.5rem] border border-white/12 bg-black/18 p-4 backdrop-blur-2xl sm:rounded-[2rem] md:p-6">
             <div className="flex flex-col gap-5">
               <div className="grid gap-3 md:grid-cols-3">
                 {plan.notePyramid.map((layer, index) => (
@@ -672,12 +675,12 @@ export function MultisensoryExperience({
                     onChange={(event) => onIntensityChange(Number(event.target.value))}
                     className="w-full"
                   />
-                  <div className="flex flex-wrap gap-3">
+                  <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
                     <button
                       type="button"
                       onClick={() => void handleStageJump(stageIndex - 1)}
                       disabled={stageIndex === 0}
-                      className="rounded-full border border-white/16 bg-white/10 px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-40"
+                      className="rounded-full border border-white/16 bg-white/10 px-4 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-40"
                     >
                       上一步
                     </button>
@@ -691,14 +694,14 @@ export function MultisensoryExperience({
 
                         void handleStart();
                       }}
-                      className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#1b1c1a]"
+                      className="rounded-full bg-white px-4 py-3 text-sm font-semibold text-[#1b1c1a]"
                     >
                       {isPlaying ? "暂停" : "继续"}
                     </button>
                     <button
                       type="button"
                       onClick={() => void handleReplay()}
-                      className="rounded-full border border-white/16 bg-white/10 px-5 py-3 text-sm font-semibold text-white"
+                      className="rounded-full border border-white/16 bg-white/10 px-4 py-3 text-sm font-semibold text-white"
                     >
                       再来一次
                     </button>
@@ -706,21 +709,21 @@ export function MultisensoryExperience({
                       type="button"
                       onClick={() => void handleStageJump(stageIndex + 1)}
                       disabled={stageIndex === plan.scenes.length - 1}
-                      className="rounded-full border border-white/16 bg-white/10 px-5 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-40"
+                      className="rounded-full border border-white/16 bg-white/10 px-4 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-40"
                     >
                       下一步
                     </button>
                     <button
                       type="button"
                       onClick={onSave}
-                      className="rounded-full border border-white/16 bg-white/10 px-5 py-3 text-sm font-semibold text-white"
+                      className="rounded-full border border-white/16 bg-white/10 px-4 py-3 text-sm font-semibold text-white"
                     >
                       保存方案
                     </button>
                     <button
                       type="button"
                       onClick={onPurchase}
-                      className="rounded-full bg-gradient-to-br from-[#f3e0b2] to-[#d0edf0] px-5 py-3 text-sm font-semibold text-[#1b1c1a]"
+                      className="rounded-full bg-gradient-to-br from-[#f3e0b2] to-[#d0edf0] px-4 py-3 text-sm font-semibold text-[#1b1c1a]"
                     >
                       购买方案
                     </button>
@@ -728,7 +731,7 @@ export function MultisensoryExperience({
                       <button
                         type="button"
                         onClick={onClose}
-                        className="rounded-full border border-white/16 bg-white/10 px-5 py-3 text-sm font-semibold text-white"
+                        className="rounded-full border border-white/16 bg-white/10 px-4 py-3 text-sm font-semibold text-white"
                       >
                         返回方案
                       </button>
