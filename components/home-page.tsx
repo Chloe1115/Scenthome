@@ -582,25 +582,12 @@ export function HomePage({ initialUser, initialIsAdmin }: HomePageProps) {
 
           <MotionReveal as="div" className="relative" delay={140}>
             <div className="relative">
-              <div className="floating-slow group relative aspect-[4/5] overflow-hidden rounded-[2.3rem] border border-white/50 bg-[#efe8df] shadow-[0_35px_90px_rgba(111,88,60,0.18)]">
+              <div className="floating-slow overflow-hidden rounded-[2rem] bg-surface-low shadow-ambient">
                 <img
-                  src="/hero-perfume-original.svg"
-                  alt="Original centered perfume bottle artwork"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.01]"
+                  src="https://images.pexels.com/photos/30999189/pexels-photo-30999189.jpeg"
+                  alt="ScentHome hero visual"
+                  className="aspect-[4/5] h-full w-full object-cover opacity-90 mix-blend-multiply"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,250,246,0.04),rgba(86,58,34,0.12))]" />
-                <div className="absolute left-7 top-7 rounded-full border border-white/55 bg-white/55 px-4 py-2 text-[0.65rem] uppercase tracking-[0.34em] text-[#7f6045] backdrop-blur-md">
-                  Original ScentHome Artwork
-                </div>
-                <div className="absolute bottom-7 right-7 hidden max-w-[46%] rounded-[1.5rem] border border-white/55 bg-white/62 p-5 shadow-[0_18px_40px_rgba(78,57,38,0.12)] backdrop-blur-xl md:block">
-                  <p className="text-[0.65rem] uppercase tracking-[0.32em] text-[#8a694d]">Scent Direction</p>
-                  <p className="mt-3 font-headline text-[1.8rem] italic leading-tight text-[#3f2a1d]">
-                    Centered bottle, soft glow, handcrafted restraint.
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-[#6f5542]">
-                    这次改成站内原创视觉，不再使用任何外部摄影作品。
-                  </p>
-                </div>
               </div>
               <div className="glass-panel ghost-border soft-panel-enter absolute -bottom-10 left-4 hidden max-w-sm rounded-[1.75rem] p-6 shadow-glow md:block">
                 <p className="font-headline text-2xl italic text-foreground">
