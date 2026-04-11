@@ -200,12 +200,12 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
   return (
     <main className="min-h-screen bg-background">
       <header className="fixed inset-x-0 top-0 z-40 border-b border-outline-variant/10 bg-background/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
-          <Link href="/" className="font-headline text-2xl italic text-foreground">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6 sm:py-5 lg:px-8">
+          <Link href="/" className="font-headline text-xl italic text-foreground sm:text-2xl">
             ScentHome
           </Link>
-          <div className="flex items-center gap-3">
-            <div className="text-sm uppercase tracking-[0.3em] text-muted">Secure Checkout</div>
+          <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
+            <div className="hidden text-sm uppercase tracking-[0.3em] text-muted sm:block">Secure Checkout</div>
             {isAdmin ? (
               <Link
                 href="/admin"
@@ -226,13 +226,13 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-32 lg:grid-cols-12 lg:gap-16 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 pb-14 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:grid-cols-12 lg:gap-16 lg:px-8">
         <MotionReveal as="aside" className="lg:col-span-5" delay={40}>
           <div className="space-y-8 lg:sticky lg:top-28">
             <section>
-              <h2 className="font-headline text-4xl text-foreground">Order Summary</h2>
-              <div className="mt-8 flex gap-5 rounded-[2rem] bg-surface p-6 shadow-ambient">
-                <div className="w-28 shrink-0 overflow-hidden rounded-[1.25rem] bg-surface-low">
+              <h2 className="font-headline text-3xl text-foreground sm:text-4xl">Order Summary</h2>
+              <div className="mt-6 flex flex-col gap-5 rounded-[1.5rem] bg-surface p-5 shadow-ambient sm:mt-8 sm:rounded-[2rem] sm:p-6 md:flex-row">
+                <div className="w-full overflow-hidden rounded-[1.25rem] bg-surface-low md:w-28 md:shrink-0">
                   {draft.image ? (
                     <img src={draft.image.dataUrl} alt={draft.image.name} className="aspect-[4/5] h-full w-full object-cover" />
                   ) : (
@@ -244,7 +244,7 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
                   )}
                 </div>
                 <div className="space-y-3">
-                  <h3 className="font-headline text-2xl leading-tight text-foreground">
+                  <h3 className="font-headline text-2xl leading-tight text-foreground sm:text-3xl">
                     {draft.generatedProfile.productName}
                   </h3>
                   <p className="text-sm leading-7 text-muted">{draft.generatedProfile.summary}</p>
@@ -253,7 +253,7 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
               </div>
             </section>
 
-            <section className="space-y-4 rounded-[2rem] bg-surface p-6 shadow-sm">
+            <section className="space-y-4 rounded-[1.5rem] bg-surface p-5 shadow-sm sm:rounded-[2rem] sm:p-6">
               <div className="flex items-center justify-between text-sm text-muted">
                 <span>Product</span>
                 <span>{formatPrice(draft.generatedProfile.price)}</span>
@@ -276,13 +276,13 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
           {message ? <div className="message-enter mb-6 rounded-2xl bg-secondary/10 px-4 py-3 text-sm text-secondary">{message}</div> : null}
           {error ? <div className="message-enter mb-6 rounded-2xl bg-red-100 px-4 py-3 text-sm text-red-700">{error}</div> : null}
 
-          <form className="space-y-10" onSubmit={handleSubmit}>
+          <form className="space-y-8 sm:space-y-10" onSubmit={handleSubmit}>
             <div className="space-y-6">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-headline italic text-white">
                   1
                 </span>
-                <h2 className="font-headline text-3xl text-foreground">Shipping Details</h2>
+                <h2 className="font-headline text-2xl text-foreground sm:text-3xl">Shipping Details</h2>
               </div>
 
               <div
@@ -350,11 +350,11 @@ export function CheckoutPage({ initialUser, initialIsAdmin }: CheckoutPageProps)
             </div>
 
             <div className="space-y-6">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-headline italic text-white">
                   2
                 </span>
-                <h2 className="font-headline text-3xl text-foreground">Stripe Payment</h2>
+                <h2 className="font-headline text-2xl text-foreground sm:text-3xl">Stripe Payment</h2>
               </div>
 
               <div className="space-y-4 rounded-[2rem] bg-surface-low p-6">

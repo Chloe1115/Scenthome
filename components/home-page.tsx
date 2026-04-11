@@ -487,8 +487,8 @@ export function HomePage({ initialUser, initialIsAdmin }: HomePageProps) {
         onConfirm={confirmPurchase}
       />
       <nav className="fixed inset-x-0 top-0 z-50 border-b border-outline-variant/10 bg-background/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
-          <a href="#top" className="font-headline text-2xl italic text-foreground">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6 sm:py-5 lg:px-8">
+          <a href="#top" className="font-headline text-xl italic text-foreground sm:text-2xl">
             乡忆 ScentHome
           </a>
           <div className="hidden items-center gap-8 text-sm text-muted md:flex">
@@ -505,7 +505,7 @@ export function HomePage({ initialUser, initialIsAdmin }: HomePageProps) {
               关于
             </a>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {currentUser ? (
               <>
                 <span className="hidden rounded-full bg-surface-high px-4 py-2 text-sm text-muted md:inline-flex">
@@ -545,14 +545,14 @@ export function HomePage({ initialUser, initialIsAdmin }: HomePageProps) {
         </div>
       </nav>
 
-      <section id="top" className="scroll-section relative overflow-hidden px-6 pb-20 pt-28 lg:px-8">
+      <section id="top" className="scroll-section relative overflow-hidden px-4 pb-16 pt-24 sm:px-6 sm:pb-20 sm:pt-28 lg:px-8">
         <div className="floating-slower absolute right-0 top-10 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(185,236,238,0.7),transparent_65%)] blur-3xl" />
-        <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="mx-auto grid max-w-7xl gap-10 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <MotionReveal as="div" className="space-y-8" delay={60}>
             <div id="hero" className="space-y-8">
             <div className="space-y-4">
               <p className="text-xs uppercase tracking-[0.35em] text-tertiary">AI 乡愁气味体验平台</p>
-              <h1 className="max-w-3xl font-headline text-5xl leading-[1.05] text-foreground md:text-7xl xl:text-8xl">
+              <h1 className="max-w-3xl font-headline text-4xl leading-[1.05] text-foreground sm:text-5xl md:text-7xl xl:text-8xl">
                 把你记得住的
                 <span className="italic text-primary"> 故乡味道 </span>
                 重新带回来。
@@ -561,18 +561,18 @@ export function HomePage({ initialUser, initialIsAdmin }: HomePageProps) {
                 通过文字、图片和情绪线索，AI 会把记忆拆解成一支可以体验、保存和购买的专属香气方案。
               </p>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
               <button
                 type="button"
                 onClick={() => document.getElementById("synthesis")?.scrollIntoView({ behavior: "smooth" })}
-                className="rounded-2xl bg-gradient-to-br from-primary to-primary-soft px-7 py-4 text-base font-semibold text-white shadow-ambient transition active:scale-[0.98]"
+                className="w-full rounded-2xl bg-gradient-to-br from-primary to-primary-soft px-7 py-4 text-base font-semibold text-white shadow-ambient transition active:scale-[0.98] sm:w-auto"
               >
                 进入记忆生成
               </button>
               <button
                 type="button"
                 onClick={() => document.getElementById("result")?.scrollIntoView({ behavior: "smooth" })}
-                className="rounded-2xl bg-surface-high px-7 py-4 text-base font-semibold text-foreground transition hover:bg-surface-highest"
+                className="w-full rounded-2xl bg-surface-high px-7 py-4 text-base font-semibold text-foreground transition hover:bg-surface-highest sm:w-auto"
               >
                 查看体验流程
               </button>

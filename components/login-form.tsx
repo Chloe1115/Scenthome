@@ -103,16 +103,16 @@ export function LoginForm({ intent, nextPath }: LoginFormProps) {
         <div className="absolute inset-0 bg-gradient-to-tr from-background via-background/50 to-tertiary-soft/10" />
       </div>
 
-      <nav className="relative z-10 flex justify-center px-6 py-10">
-        <Link href="/" className="font-headline text-3xl italic text-foreground">
+      <nav className="relative z-10 flex justify-center px-4 py-8 sm:px-6 sm:py-10">
+        <Link href="/" className="font-headline text-2xl italic text-foreground sm:text-3xl">
           乡忆 ScentHome
         </Link>
       </nav>
 
-      <div className="relative z-10 flex flex-1 items-center justify-center px-6 pb-20">
-        <div className="glass-panel ghost-border w-full max-w-[480px] rounded-[1.75rem] p-8 shadow-ambient md:p-12">
-          <div className="mb-10 space-y-4 text-center">
-            <h1 className="font-headline text-4xl leading-tight text-foreground md:text-5xl">{heading}</h1>
+      <div className="relative z-10 flex flex-1 items-center justify-center px-4 pb-14 sm:px-6 sm:pb-20">
+        <div className="glass-panel ghost-border w-full max-w-[480px] rounded-[1.5rem] p-6 shadow-ambient sm:rounded-[1.75rem] sm:p-8 md:p-12">
+          <div className="mb-8 space-y-3 text-center sm:mb-10 sm:space-y-4">
+            <h1 className="font-headline text-3xl leading-tight text-foreground sm:text-4xl md:text-5xl">{heading}</h1>
             <p className="mx-auto max-w-sm text-sm leading-7 text-muted">
               登录后可保存香气档案、继续支付流程，并把你的记忆体验长期保留在个人账户里。
             </p>
