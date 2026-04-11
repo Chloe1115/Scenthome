@@ -6,6 +6,10 @@ import { createStripeClient, getRequestBaseUrl } from "@/lib/stripe";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
+function isMissingColumnError(error: { message?: string | null } | null | undefined, column: string) {
+  return Boolean(error?.message?.includes(`Could not find the '${column}' column`));
+}
+
 export async function POST(request: Request) {
   try {
     const stripe = createStripeClient();
@@ -26,8 +30,15 @@ export async function POST(request: Request) {
     const payload = checkoutRequestSchema.parse(await request.json());
     const amount = getOrderAmount(payload);
     const baseUrl = getRequestBaseUrl(request);
+    const profileSnapshot = buildOrderProfileSnapshot(payload);
+    const basePaymentSummary = {
+      provider: "stripe",
+      payment_status: "pending",
+      customer_email: payload.contactEmail,
+      profile_snapshot: profileSnapshot,
+    };
 
-    const { data: pendingOrder, error: orderError } = await adminClient
+    let pendingOrderResult = await adminClient
       .from("orders")
       .insert({
         user_id: user?.id ?? null,
@@ -36,19 +47,36 @@ export async function POST(request: Request) {
         amount,
         status: "pending_payment",
         shipping_address: payload.shippingAddress,
-        payment_summary: {
-          provider: "stripe",
-          payment_status: "pending",
-          customer_email: payload.contactEmail,
-        },
-        profile_snapshot: buildOrderProfileSnapshot(payload),
+        payment_summary: basePaymentSummary,
+        profile_snapshot: profileSnapshot,
       })
       .select("id")
       .single();
 
-    if (orderError || !pendingOrder) {
-      return NextResponse.json({ error: orderError?.message ?? "Unable to create pending order." }, { status: 400 });
+    if (isMissingColumnError(pendingOrderResult.error, "profile_snapshot")) {
+      pendingOrderResult = await adminClient
+        .from("orders")
+        .insert({
+          user_id: user?.id ?? null,
+          profile_id: payload.draft.generatedProfile.savedProfileId ?? null,
+          product_name: payload.draft.generatedProfile.productName,
+          amount,
+          status: "pending_payment",
+          shipping_address: payload.shippingAddress,
+          payment_summary: basePaymentSummary,
+        })
+        .select("id")
+        .single();
     }
+
+    if (pendingOrderResult.error || !pendingOrderResult.data) {
+      return NextResponse.json(
+        { error: pendingOrderResult.error?.message ?? "Unable to create pending order." },
+        { status: 400 },
+      );
+    }
+
+    const pendingOrder = pendingOrderResult.data;
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -96,8 +124,7 @@ export async function POST(request: Request) {
       .from("orders")
       .update({
         payment_summary: {
-          provider: "stripe",
-          payment_status: "pending",
+          ...basePaymentSummary,
           checkout_session_id: session.id,
           checkout_url: session.url,
         },

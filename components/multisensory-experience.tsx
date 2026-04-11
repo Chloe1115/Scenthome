@@ -570,7 +570,7 @@ export function MultisensoryExperience({
 
   return (
     <section
-      className="experience-overlay fade-up-enter fixed inset-0 z-[90] overflow-y-auto overscroll-contain touch-pan-y text-white"
+      className="experience-overlay fade-up-enter fixed inset-0 z-[90] overflow-y-auto overscroll-contain bg-[#070a0c] touch-pan-y text-white"
       style={{ WebkitOverflowScrolling: "touch" }}
     >
       <button type="button" aria-label="关闭体验" className="absolute inset-0 z-0" onClick={onClose} />

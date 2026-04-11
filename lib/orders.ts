@@ -62,6 +62,32 @@ export type StoredProfileSnapshot = {
   image_path: string | null;
 };
 
+export function parseStoredProfileSnapshot(value: unknown): StoredProfileSnapshot | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return null;
+  }
+
+  const candidate = value as Partial<StoredProfileSnapshot> & {
+    generated_profile?: Partial<StoredGeneratedProfile>;
+  };
+
+  if (
+    typeof candidate.narrative !== "string" ||
+    !Array.isArray(candidate.emotions) ||
+    !candidate.emotions.every((emotion) => typeof emotion === "string") ||
+    !candidate.generated_profile ||
+    typeof candidate.generated_profile !== "object" ||
+    typeof candidate.generated_profile.title !== "string" ||
+    typeof candidate.generated_profile.summary !== "string" ||
+    !Array.isArray(candidate.generated_profile.emotionTags) ||
+    !Array.isArray(candidate.generated_profile.scentTags)
+  ) {
+    return null;
+  }
+
+  return candidate as StoredProfileSnapshot;
+}
+
 export function getOrderAmount(payload: CheckoutRequest) {
   return payload.draft.generatedProfile.price + SHIPPING_FEE;
 }

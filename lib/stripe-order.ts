@@ -1,6 +1,6 @@
 import type Stripe from "stripe";
 
-import type { StoredProfileSnapshot } from "@/lib/orders";
+import { parseStoredProfileSnapshot, type StoredProfileSnapshot } from "@/lib/orders";
 import { createStripeClient } from "@/lib/stripe";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
@@ -10,11 +10,15 @@ type StoredOrderRecord = {
   profile_id: string | null;
   status: string;
   payment_summary: Record<string, unknown> | null;
-  profile_snapshot: StoredProfileSnapshot;
+  profile_snapshot?: StoredProfileSnapshot | null;
 };
 
 function asObject(value: unknown) {
   return value && typeof value === "object" && !Array.isArray(value) ? (value as Record<string, unknown>) : {};
+}
+
+function isMissingColumnError(error: { message?: string | null } | null | undefined, column: string) {
+  return Boolean(error?.message?.includes(`Could not find the '${column}' column`));
 }
 
 export async function confirmStripeCheckoutSession(sessionId: string) {
@@ -35,17 +39,29 @@ export async function confirmStripeCheckoutSession(sessionId: string) {
     throw new Error("Stripe session is missing the pending order reference.");
   }
 
-  const { data: order, error: orderError } = await adminClient
+  let orderResult = await adminClient
     .from("orders")
     .select("id, user_id, profile_id, status, payment_summary, profile_snapshot")
     .eq("id", pendingOrderId)
     .single();
 
-  if (orderError || !order) {
-    throw new Error(orderError?.message ?? "Pending order not found.");
+  if (isMissingColumnError(orderResult.error, "profile_snapshot")) {
+    orderResult = await adminClient
+      .from("orders")
+      .select("id, user_id, profile_id, status, payment_summary")
+      .eq("id", pendingOrderId)
+      .single();
   }
 
-  const storedOrder = order as StoredOrderRecord;
+  if (orderResult.error || !orderResult.data) {
+    throw new Error(orderResult.error?.message ?? "Pending order not found.");
+  }
+
+  const storedOrder = orderResult.data as StoredOrderRecord;
+  const paymentSummary = asObject(storedOrder.payment_summary);
+  const snapshot =
+    parseStoredProfileSnapshot(storedOrder.profile_snapshot) ??
+    parseStoredProfileSnapshot(paymentSummary.profile_snapshot);
 
   if (session.payment_status !== "paid") {
     return {
@@ -57,9 +73,8 @@ export async function confirmStripeCheckoutSession(sessionId: string) {
   }
 
   let profileId = storedOrder.profile_id;
-  const snapshot = storedOrder.profile_snapshot;
 
-  if (!profileId && storedOrder.user_id) {
+  if (!profileId && storedOrder.user_id && snapshot) {
     const savedProfileId =
       snapshot.generated_profile &&
       typeof snapshot.generated_profile.savedProfileId === "string" &&
@@ -101,8 +116,6 @@ export async function confirmStripeCheckoutSession(sessionId: string) {
       ? paymentIntent.payment_method
       : null;
   const cardDetails = paymentMethod?.type === "card" ? paymentMethod.card : null;
-  const paymentSummary = asObject(storedOrder.payment_summary);
-
   if (storedOrder.status !== "paid") {
     const { error: updateError } = await adminClient
       .from("orders")
